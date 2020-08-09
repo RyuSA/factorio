@@ -20,12 +20,12 @@ spec:
           command:
             - "sh"
             - "-c"
-            - "cp -r /config /factorio/config"
+            - "cp /source/* /config"
           volumeMounts:
             - name: factorio-config
-              mountPath: /factorio/config
-            - name: factorio-config-source
               mountPath: /config
+            - name: factorio-config-source
+              mountPath: /source
       containers:
         - name: app
           env:
