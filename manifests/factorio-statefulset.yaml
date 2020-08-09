@@ -51,4 +51,4 @@ spec:
           emptyDir: {}
         - name: factorio-savedata
           gcePersistentDisk:
-            pdName: REPLACE ME
+            pdName: factorio-disk
