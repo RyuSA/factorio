@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: factorio
+  labels:
+    app: factorio
+spec:
+  selector:
+    matchLabels:
+      app: factorio
+  serviceName: factorio
+  template:
+    metadata:
+      labels:
+        app: factorio
+    spec:
+      initContainers:
+        - name: init
+          image: docker.io/busybox:1.32.0
+          command:
+            - "sh"
+            - "-c"
+            - "cp -r /config /factorio/config"
+          volumeMounts:
+            - name: factorio-config
+              mountPath: /factorio/config
+            - name: factorio-config-source
+              mountPath: /config
+      containers:
+        - name: app
+          env:
+            - name: TZ
+              value: Asia/Tokyo
+          image: docker.io/factoriotools/factorio:0.18.45
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 34197
+              protocol: UDP
+            - containerPort: 27015
+              protocol: TCP
+          volumeMounts:
+            - name: factorio-savedata
+              mountPath: /factorio/saves
+            - name: factorio-config
+              mountPath: /factorio/config
+      volumes:
+        - name: factorio-config-source
+          configMap:
+            name: factorio
+        - name: factorio-config
+          emptyDir: {}
+        - name: factorio-savedata
+          gcePersistentDisk:
+            pdName: REPLACE ME

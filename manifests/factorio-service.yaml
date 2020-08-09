@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: factorio
+  name: factorio
+spec:
+  selector:
+    app: factorio
+  type: LoadBalancer
+  loadBalancerIP: REPLACE ME
+  ports:
+    - port: 34197
+      targetPort: 34197
+      protocol: UDP
