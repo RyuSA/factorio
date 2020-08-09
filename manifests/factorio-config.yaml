@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: factorio
-  label:
+  labels:
     app: factorio
 data:
   map-gen-settings.json: |-
