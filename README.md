@@ -12,7 +12,7 @@ factorio gaming server on Google Kubernetes Engine
 
 3. Replace 'REPLACE ME' in `manifests/*.yaml`
 
-4. Configure factorio config in `manifests/factorio-config.yaml`
+4. Configure factorio in `manifests/factorio-config.yaml`
 
 5. Deploy components onto GKE<br />
-   `kubectl create -n factorio -f manifests/`
+   `kubectl create -f manifests/`
